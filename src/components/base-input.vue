@@ -53,6 +53,7 @@ export default {
     regex: {
       type: Object,
       default: null,
+      example: '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$'
     },
     labelInside: {
       type: Boolean,
@@ -75,7 +76,8 @@ export default {
   },
   computed: {
     getValueLength() {
-      return this.value ? this.value.length : '';
+      console.log(this.value);
+      return this.value !== '' && this.value !== null ? this.value.length : '';
     },
     getIconCheck() {
       if (this.isValidate === false) {
@@ -91,6 +93,13 @@ export default {
         return closedEye;
       }
     },
+    classBorder() {
+      return this.isValidate && this.showBorder && this.showValidate && this.returnValueByLength(this.getValueLength, true, false, 1)
+        ? this.customStyle.borderIsValid
+        : this.isValidate === false
+        ? this.customStyle.borderIsBad
+        : this.customStyle.borderIsDefault
+    }
   },
   mounted() {
     if (this.getValueLength > 1) {
@@ -101,6 +110,9 @@ export default {
     value(value) {
       this.update(value);
     },
+    regex(){
+      this.update(this.value);
+    }
   },
   data() {
     return {
@@ -113,16 +125,24 @@ export default {
     returnValueByLength(value, correct, incorrect, number) {
       return value >= number ? correct : incorrect;
     },
+    testRegex(value) {
+      if (this.regex !== null && this.regex !== '') {
+        const regex = new RegExp(this.regex);
+        return regex.test(value)
+      } else {
+        return true
+      }
+    },
     update(value) {
-      if (this.isRequired && this.regex.test(value) && value.length >= 1) {
+      if (this.isRequired && this.testRegex(value) && value.length >= 1) {
         this.isValidate = true;
       } else if (
         this.isRequired &&
-        !this.regex.test(value) &&
+        !this.testRegex(value) &&
         value.length >= 1
       ) {
         this.isValidate = false;
-      } else if (!this.isRequired) {
+      } else if (!this.isRequired && value.length >= 1) {
         this.isValidate = true;
       } else {
         this.isValidate = null;
@@ -135,14 +155,7 @@ export default {
 </script>
 <template>
   <div
-    :class="[
-      isValidate && showBorder
-        ? customStyle.borderIsValid
-        : isValidate === false
-        ? customStyle.borderIsBad
-        : customStyle.borderIsDefault,
-      inputClass,
-    ]"
+    :class="[classBorder, inputClass]"
     class="relative"
   >
     <div
@@ -164,7 +177,7 @@ export default {
         :type="showPassword ? 'text' : inputType"
       />
       <button
-        v-if="showIcon && showValidate && isValidate !== null && getValueLength >= 1"
+        v-if="showValidate && isValidate !== null && getValueLength >= 1"
         @click.prevent="showErrorMessage = !showErrorMessage"
         :class="[
           returnValueByLength(
@@ -191,14 +204,14 @@ export default {
         ]"
       >
         <button
-          v-if="inputType === 'password'"
+          v-if="showIcon && inputType === 'password'"
           @click.prevent="showPassword = !showPassword"
           class="button-icon"
           type="button"
         >
           <img :src="getIconEyes" class="w-5" />
         </button>
-        <div v-if="icon" class="button-icon">
+        <div v-if="icon && showIcon" class="button-icon">
           <img :src="require(`@assets/images/${icon}`)" class="w-5" />
         </div>
       </div>
