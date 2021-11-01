@@ -20,28 +20,28 @@ export default {
   <div>
     <div class="w-full md:w-2/3 mx-auto justify-center px-2 my-5">
       
-      <tab>
+      <tab title="Custom Input">
         <template v-slot:preview>
           <Custom></Custom>
         </template>
         <template v-slot:code></template>
       </tab>
 
-      <tab>
+      <tab title="Login">
         <template v-slot:preview>
           <Login></Login>
         </template>
         <template v-slot:code></template>
       </tab>
 
-      <tab>
+      <tab title="Signin">
         <template v-slot:preview>
           <Signin></Signin>
         </template>
         <template v-slot:code> </template>
       </tab>
 
-      <tab>
+      <tab title="Form">
         <template v-slot:preview>
           <Form></Form>
         </template>

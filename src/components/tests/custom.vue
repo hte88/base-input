@@ -15,7 +15,6 @@ export default {
         errorMessage: 'error message',
         inputClass: 'mb-2 border-2 rounded-md',
         regex: null,
-        showValidate: true,
         showBorder: true,
         showIcon: true,
         icon: '',
@@ -29,57 +28,53 @@ export default {
 </script>
 <template>
   <div class="md:flex w-full justify-evenly h-full">
-    <div class="bg-white">
-      <h1>Configuration</h1>
+    <div class="bg-white border-r border-gray-100">
+      <h1 class="my-5 font-bold text-center">Configuration</h1>
       <base-input
         v-model:value="customConfig.label"
         input-type="text"
         label="Label"
-        :custom-style = "{ 'inputBgEmpty': 'bg-transparent' }"
+        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-t border-gray-100' }"
         :label-inside="true"
-        :show-validate="false"
+        :show-icon="false"
       >
       </base-input>
       <base-input
         v-model:value="customConfig.type"
         inputType="text"
         label="Type"
-        :custom-style = "{ 'inputBgEmpty': 'bg-transparent' }"
+        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
         :label-inside="true"
-        :show-validate="false"
+        :show-icon="false"
       >
       </base-input>
       <base-input
         v-model:value="customConfig.errorMessage"
         inputType="text"
         label="Error message"
-        :custom-style = "{ 'inputBgEmpty': 'bg-transparent' }"
+        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
         :label-inside="true"
-        :show-validate="false"
+        :show-icon="false"
       >
       </base-input>
       <base-input
         v-model:value="customConfig.inputClass"
         inputType="text"
         label="Class on input"
-        :custom-style = "{ 'inputBgEmpty': 'bg-transparent' }"
+        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
         :label-inside="true"
-        :show-validate="false"
+        :show-icon="false"
       >
       </base-input>
       <base-input
         v-model:value="customConfig.regex"
         inputType="text"
         label="Regex"
-        :custom-style = "{ 'inputBgEmpty': 'bg-transparent' }"
+        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
         :label-inside="true"
-        :show-validate="false"
+        :show-icon="false"
       >
       </base-input>
-      <div class="flex justify-between mt-2 px-2">
-        <label for="validate">show validate ?</label>
-        <input v-model="customConfig.showValidate" id="validate" type="checkbox" />
-      </div>
       <div class="flex justify-between mt-2 px-2">
         <label for="required">Is required ?</label>
         <input v-model="customConfig.isRequired" id="required" type="checkbox" />
@@ -100,21 +95,23 @@ export default {
     <div class="mx-auto bg-white rounded px-2 md:px-5 py-10 my-10">
       <div class="mb-10 text-center w-full">
         <h1 class="mb-2 text-xl uppercase font-bold">Test me</h1>
+        <p>Custom this input for testing a plugin</p>
       </div>
       <base-input
-        v-model:value="modelValue.value"
-        v-model:isValid="modelValue.isValid"
+          v-for="(item, index) in 3"
+          :key="index"
+          v-model:value="modelValue.value"
+          v-model:isValid="modelValue.isValid"
           :inputType="customConfig.type"
           :name="customConfig.name"
           :label="customConfig.label"
           :error-message="customConfig.errorMessage"
           :input-class="customConfig.inputClass"
           :regex="customConfig.regex"
-          :isRequired="customConfig.isRequired"
-          :showValidate="customConfig.showValidate"
-          :showBorder="customConfig.showBorder"
-          :showIcon="customConfig.showIcon"
-          :labelInside="customConfig.labelInside"
+          :is-required="customConfig.isRequired"
+          :show-border="customConfig.showBorder"
+          :show-icon="customConfig.showIcon"
+          :label-inside="customConfig.labelInside"
       >
       </base-input>
     </div>

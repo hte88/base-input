@@ -76,7 +76,6 @@ export default {
   },
   computed: {
     getValueLength() {
-      console.log(this.value);
       return this.value !== '' && this.value !== null ? this.value.length : '';
     },
     getIconCheck() {
@@ -94,7 +93,7 @@ export default {
       }
     },
     classBorder() {
-      return this.isValidate && this.showBorder && this.showValidate && this.returnValueByLength(this.getValueLength, true, false, 1)
+      return this.isValidate && this.showBorder && this.returnValueByLength(this.getValueLength, true, false, 1)
         ? this.customStyle.borderIsValid
         : this.isValidate === false
         ? this.customStyle.borderIsBad
@@ -177,7 +176,7 @@ export default {
         :type="showPassword ? 'text' : inputType"
       />
       <button
-        v-if="showValidate && isValidate !== null && getValueLength >= 1"
+        v-if="isValidate !== null && getValueLength >= 1 && showIcon"
         @click.prevent="showErrorMessage = !showErrorMessage"
         :class="[
           returnValueByLength(
@@ -211,7 +210,7 @@ export default {
         >
           <img :src="getIconEyes" class="w-5" />
         </button>
-        <div v-if="icon && showIcon" class="button-icon">
+        <div v-if="icon" class="button-icon">
           <img :src="require(`@assets/images/${icon}`)" class="w-5" />
         </div>
       </div>
