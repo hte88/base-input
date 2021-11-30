@@ -6,11 +6,13 @@ import Signin from '@/components/tests/signin.vue';
 import Form from '@/components/tests/form.vue';
 import Custom from '@/components/tests/custom.vue';
 
+import '@/assets/style/base-input.css';
+
 export default {
   components: { baseInput, tab, Login, Signin, Form, Custom },
   data() {
     return {
-      
+
     };
   },
 };
@@ -19,7 +21,7 @@ export default {
 <template>
   <div>
     <div class="w-full md:w-2/3 mx-auto justify-center px-2 my-5">
-      
+
       <tab title="Custom Input">
         <template v-slot:preview>
           <Custom></Custom>
@@ -50,7 +52,3 @@ export default {
     </div>
   </div>
 </template>
-<style scoped>
-.console {
-}
-</style>

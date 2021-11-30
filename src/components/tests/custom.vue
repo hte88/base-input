@@ -1,10 +1,18 @@
 <script>
+import check from '@/assets/images/icon-check.svg';
+import openedEye from '@/assets/images/icon-opened-eye.svg';
+import closedEye from '@/assets/images/icon-closed-eye.svg';
+import warning from '@/assets/images/icon-warning.svg';
 import baseInput from '@/components/base-input.vue';
 
 export default {
   components: { baseInput },
   data() {
     return {
+      check,
+      warning,
+      openedEye,
+      closedEye,
       modelValue: {
         value: '',
         isValid: ''
@@ -13,11 +21,14 @@ export default {
         type: 'text',
         label: 'label',
         errorMessage: 'error message',
-        inputClass: 'mb-2 border-2 rounded-md',
+        inputClass: 'mb-2 border-2 rounded-md mt-8',
         regex: null,
         showBorder: true,
         showIcon: true,
-        icon: '',
+        iconValid: check,
+        iconWarning: warning,
+        iconOpen: openedEye,
+        iconClose: closedEye,
         isRequired: true,
         isValid: true,
         labelInside: false,
@@ -28,13 +39,13 @@ export default {
 </script>
 <template>
   <div class="md:flex w-full justify-evenly h-full">
-    <div class="bg-white border-r border-gray-100">
+    <div class="bg-white border-r border-gray-200">
       <h1 class="my-5 font-bold text-center">Configuration</h1>
       <base-input
         v-model:value="customConfig.label"
         input-type="text"
         label="Label"
-        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-t border-gray-100' }"
+        :custom-style="{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', 'borderIsDefault': 'border-b border-t border-gray-100' }"
         :label-inside="true"
         :show-icon="false"
       >
@@ -43,7 +54,7 @@ export default {
         v-model:value="customConfig.type"
         inputType="text"
         label="Type"
-        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
+        :custom-style="{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', 'borderIsDefault': 'border-b border-gray-100' }"
         :label-inside="true"
         :show-icon="false"
       >
@@ -52,7 +63,7 @@ export default {
         v-model:value="customConfig.errorMessage"
         inputType="text"
         label="Error message"
-        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
+        :custom-style="{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', 'borderIsDefault': 'border-b border-gray-100' }"
         :label-inside="true"
         :show-icon="false"
       >
@@ -61,7 +72,7 @@ export default {
         v-model:value="customConfig.inputClass"
         inputType="text"
         label="Class on input"
-        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
+        :custom-style="{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', 'borderIsDefault': 'border-b border-gray-100' }"
         :label-inside="true"
         :show-icon="false"
       >
@@ -70,7 +81,7 @@ export default {
         v-model:value="customConfig.regex"
         inputType="text"
         label="Regex"
-        :custom-style = "{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', borderIsDefault: 'border-b border-gray-100' }"
+        :custom-style="{ 'inputBgEmpty': 'bg-gray-100', 'inputBgFull': 'bg-transparent', 'borderIsDefault': 'border-b border-gray-100' }"
         :label-inside="true"
         :show-icon="false"
       >
@@ -105,6 +116,11 @@ export default {
           :inputType="customConfig.type"
           :name="customConfig.name"
           :label="customConfig.label"
+          :icon="customConfig.iconValid"
+          :url-icon-valid="customConfig.iconValid"
+          :url-icon-faild="warning"
+          :url-icon-open-eyes="openedEye"
+          :url-icon-close-eyes="closedEye"
           :error-message="customConfig.errorMessage"
           :input-class="customConfig.inputClass"
           :regex="customConfig.regex"

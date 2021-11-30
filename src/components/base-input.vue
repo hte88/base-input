@@ -1,10 +1,4 @@
 <script>
-import close from '@/assets/images/icon-close.svg';
-import check from '@/assets/images/icon-check.svg';
-import openedEye from '@/assets/images/icon-opened-eye.svg';
-import closedEye from '@/assets/images/icon-closed-eye.svg';
-import warning from '@/assets/images/icon-warning.svg';
-
 export default {
   model: {
     prop: 'title',
@@ -50,10 +44,27 @@ export default {
       type: String,
       default: '',
     },
+    urlIconValid: {
+      type: String,
+      default: '',
+    },
+    urlIconFaild: {
+      type: String,
+      default: '',
+    },
+    urlIconOpenEyes: {
+      type: String,
+      default: '',
+    },
+    urlIconCloseEyes: {
+      type: String,
+      default: '',
+    },
     regex: {
       type: Object,
       default: null,
-      example: '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$'
+      example:
+        '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$',
     },
     labelInside: {
       type: Boolean,
@@ -80,25 +91,27 @@ export default {
     },
     getIconCheck() {
       if (this.isValidate === false) {
-        return warning;
+        return this.urlIconFaild;
       } else {
-        return check;
+        return this.urlIconValid;
       }
     },
     getIconEyes() {
       if (this.showPassword) {
-        return openedEye;
+        return this.urlIconOpenEyes;
       } else {
-        return closedEye;
+        return this.urlIconCloseEyes;
       }
     },
     classBorder() {
-      return this.isValidate && this.showBorder && this.returnValueByLength(this.getValueLength, true, false, 1)
+      return this.isValidate &&
+        this.showBorder &&
+        this.returnValueByLength(this.getValueLength, true, false, 1)
         ? this.customStyle.borderIsValid
         : this.isValidate === false
         ? this.customStyle.borderIsBad
-        : this.customStyle.borderIsDefault
-    }
+        : this.customStyle.borderIsDefault;
+    },
   },
   mounted() {
     if (this.getValueLength > 1) {
@@ -109,9 +122,9 @@ export default {
     value(value) {
       this.update(value);
     },
-    regex(){
+    regex() {
       this.update(this.value);
-    }
+    },
   },
   data() {
     return {
@@ -127,9 +140,9 @@ export default {
     testRegex(value) {
       if (this.regex !== null && this.regex !== '') {
         const regex = new RegExp(this.regex);
-        return regex.test(value)
+        return regex.test(value);
       } else {
-        return true
+        return true;
       }
     },
     update(value) {
@@ -153,10 +166,7 @@ export default {
 };
 </script>
 <template>
-  <div
-    :class="[classBorder, inputClass]"
-    class="relative"
-  >
+  <div :class="[classBorder, inputClass]" class="base-input">
     <div
       :class="[
         returnValueByLength(
@@ -165,18 +175,23 @@ export default {
           customStyle.inputBgEmpty,
           1
         ),
-        'flex justify-between z-0 relative',
+        'bloc-input',
       ]"
     >
       <input
         v-model="value"
         v-bind="$attrs"
-        :class="[labelInside ? 'pt-4 pb-2' : 'py-3', 'input']"
+        :class="[
+          labelInside ? 'input-label-inside' : 'input-label-inside',
+          'input',
+        ]"
         :placeholder="$attrs.placeholder ? $attrs.placeholder : ' '"
         :type="showPassword ? 'text' : inputType"
       />
       <button
-        v-if="isValidate !== null && getValueLength >= 1 && showIcon"
+        v-if="
+          getIconCheck && isValidate !== null && getValueLength >= 1 && showIcon
+        "
         @click.prevent="showErrorMessage = !showErrorMessage"
         :class="[
           returnValueByLength(
@@ -189,7 +204,7 @@ export default {
         ]"
         type="button"
       >
-        <img class="w-5" :src="getIconCheck" />
+        <img :src="getIconCheck" alt="" />
       </button>
       <div
         :class="[
@@ -199,35 +214,38 @@ export default {
             customStyle.inputBgEmpty,
             1
           ),
-          'flex',
+          'bloc-button',
         ]"
       >
         <button
-          v-if="showIcon && inputType === 'password'"
+          v-if="getIconEyes && showIcon && inputType === 'password'"
           @click.prevent="showPassword = !showPassword"
           class="button-icon"
           type="button"
         >
-          <img :src="getIconEyes" class="w-5" />
+          <img :src="getIconEyes" alt="" />
         </button>
         <div v-if="icon" class="button-icon">
-          <img :src="require(`@assets/images/${icon}`)" class="w-5" />
+          <img :src="icon" alt="" />
         </div>
       </div>
       <label
         v-if="$attrs.label && !$attrs.placeholder"
         :for="$attrs.name"
-        :class="[labelInside ? 'labelInside' : 'labelOutside', customStyle.label]"
+        :class="[
+          labelInside ? 'label-inside' : 'label-outside',
+          customStyle.label,
+        ]"
       >
         {{ $attrs.label }}
-        <span v-if="isRequired" class="px-1">*</span>
+        <span v-if="isRequired" class="required">*</span>
       </label>
     </div>
-    <div class="absolute">
+    <div class="bloc-error">
       <transition name="fade">
         <p
           v-if="showErrorMessage && isValidate === false && errorMessage"
-          :class="[customStyle.errorMessage, 'mt-1 text-xs md:text-sm']"
+          :class="[customStyle.errorMessage, 'error-message']"
         >
           {{ errorMessage }}
         </p>
@@ -235,36 +253,3 @@ export default {
     </div>
   </div>
 </template>
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-.input {
-  @apply mx-auto focus:outline-none border-0 ring-0 focus:ring-0 appearance-none bg-transparent w-full block pl-2 text-xs md:text-sm;
-}
-.button-icon {
-  @apply justify-center items-center flex w-8 mr-2;
-}
-.labelOutside {
-  @apply absolute inset-y-0 left-2 items-center flex z-[-1] duration-300 transform-none text-xs md:text-sm;
-}
-.labelInside {
-  @apply absolute top-0 bottom-0 left-2 items-center flex z-[-1] duration-300 transform-none text-xs md:text-sm;
-}
-
-input:focus-within ~ label.labelInside,
-input:not(:placeholder-shown) ~ label.labelInside {
-  @apply transform top-0 bottom-auto text-xs;
-}
-
-input:focus-within ~ label.labelOutside,
-input:not(:placeholder-shown) ~ label.labelOutside {
-  @apply transform -translate-y-9 -translate-x-2;
-}
-</style>
