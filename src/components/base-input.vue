@@ -10,58 +10,58 @@ export default {
     },
     isValid: {
       type: Boolean,
-      default: null,
+      default: null
     },
     inputType: {
       type: String,
-      default: 'text',
+      default: 'text'
     },
     inputClass: {
       type: String,
-      default: '',
+      default: ''
     },
     isRequired: {
       type: Boolean,
-      default: false,
+      default: false
     },
     showValidate: {
       type: Boolean,
-      default: true,
+      default: true
     },
     showBorder: {
       type: Boolean,
-      default: true,
+      default: true
     },
     showIcon: {
       type: Boolean,
-      default: true,
+      default: true
     },
     errorMessage: {
       type: String,
-      default: '',
+      default: ''
     },
     icon: {
-      type: String,
-      default: '',
+      type: [Object, String],
+      default: null,
     },
     urlIconValid: {
-      type: String,
-      default: '',
+      type: [Object, String],
+      default: null,
     },
     urlIconFaild: {
-      type: String,
-      default: '',
+      type: [Object, String],
+      default: null,
     },
     urlIconOpenEyes: {
-      type: String,
-      default: '',
+      type: [Object, String],
+      default: null,
     },
     urlIconCloseEyes: {
-      type: String,
-      default: '',
+      type: [Object, String],
+      default: null,
     },
     regex: {
-      type: Object,
+      type: [Object, String],
       default: null,
       example:
         '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$',
@@ -74,20 +74,20 @@ export default {
       type: Object,
       default() {
         return {
-          borderIsValid: 'border-green-500',
-          borderIsDefault: 'border-gray-200',
-          borderIsBad: 'border-red-500',
-          errorMessage: 'text-red-700',
-          label: 'text-gray-500',
-          inputBgFull: 'bg-gray-50 rounded-md',
-          inputBgEmpty: 'bg-gray-100 rounded-md',
+          borderIsValid: 'border-valid',
+          borderIsDefault: 'border-default',
+          borderIsBad: 'border-faild',
+          errorMessage: 'error-color',
+          label: 'label-color',
+          inputBgFull: 'bg-full',
+          inputBgEmpty: 'bg-empty',
         };
       },
     },
   },
   computed: {
     getValueLength() {
-      return this.value !== '' && this.value !== null ? this.value.length : '';
+      return this.value !== '' && this.value !== null ? this.value?.length : '';
     },
     getIconCheck() {
       if (this.isValidate === false) {
@@ -166,7 +166,7 @@ export default {
 };
 </script>
 <template>
-  <div :class="[classBorder, inputClass]" class="base-input">
+  <div :class="[classBorder, inputClass, 'base-input']">
     <div
       :class="[
         returnValueByLength(
@@ -182,7 +182,7 @@ export default {
         v-model="value"
         v-bind="$attrs"
         :class="[
-          labelInside ? 'input-label-inside' : 'input-label-inside',
+          labelInside ? 'input-label-inside' : 'input-label-outside',
           'input',
         ]"
         :placeholder="$attrs.placeholder ? $attrs.placeholder : ' '"
@@ -190,7 +190,10 @@ export default {
       />
       <button
         v-if="
-          getIconCheck && isValidate !== null && getValueLength >= 1 && showIcon
+          getIconCheck &&
+          isValidate === false &&
+          getValueLength >= 1 &&
+          showIcon
         "
         @click.prevent="showErrorMessage = !showErrorMessage"
         :class="[
@@ -204,8 +207,28 @@ export default {
         ]"
         type="button"
       >
-        <img :src="getIconCheck" alt="" />
+        <img :src="getIconCheck.src" :alt="getIconCheck.alt" />
       </button>
+      <div
+        v-if="
+          getIconCheck &&
+          isValidate !== false &&
+          getValueLength >= 1 &&
+          showIcon
+        "
+        :class="[
+          returnValueByLength(
+            getValueLength,
+            customStyle.inputBgFull,
+            customStyle.inputBgEmpty,
+            1
+          ),
+          'button-icon',
+        ]"
+      >
+        <img :src="getIconCheck.src" :alt="getIconCheck.alt" />
+      </div>
+
       <div
         :class="[
           returnValueByLength(
@@ -226,7 +249,7 @@ export default {
           <img :src="getIconEyes" alt="" />
         </button>
         <div v-if="icon" class="button-icon">
-          <img :src="icon" alt="" />
+          <img :src="icon.src" :alt="icon.alt" />
         </div>
       </div>
       <label
