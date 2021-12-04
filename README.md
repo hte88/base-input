@@ -12,7 +12,7 @@ Base-input return if your value is valid and value in Object.
       <base-input
           v-model:value="modelValue.value"
           v-model:isValid="modelValue.isValid"
-          inputType="text"
+          input-type="text"
           name="email"
           label="Email"
           error-message="This email, is not good"
@@ -36,7 +36,7 @@ yarn:
 yarn add base-input
 ```
 
-[![Demo on Netlify](https://www.netlify.com/img/deploy/button.svg)](https://base_input.netlify.com)
+[![Demo on Netlify](https://www.netlify.com/img/deploy/button.svg)](https://vue-base-input.netlify.app/)
 
 #### Bonus links
 
