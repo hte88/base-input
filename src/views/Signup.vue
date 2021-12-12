@@ -1,6 +1,6 @@
 <script>
 import vueBaseInput from 'vue-base-input';
-import 'vue-base-input/@/assets/vue-base-input-tailwind-css.css';
+import 'vue-base-input/src/assets/vue-base-input-tailwind-css.css';
 import signupJson from '../static/signup.json';
 import check from '@/assets/images/icon-check.svg';
 import openedEye from '@/assets/images/icon-opened-eye.svg';
