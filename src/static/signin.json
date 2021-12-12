@@ -1,0 +1,29 @@
+[
+    {
+        "activeInput": true,
+        "id": "1",
+        "name": "login",
+        "class": "mt-2",
+        "maxlength": "128",
+        "isRequired": true,
+        "regex": "^\\w{3,10}$",
+        "label": "Login",
+        "error": "Wrong login min 3 max 10",
+        "value": "Hello",
+        "isValid": null
+    },
+    {
+        "activeInput": true,
+        "id": "2",
+        "name": "password",
+        "type": "password",
+        "class": "my-10",
+        "maxlength": "128",
+        "isRequired": true,
+        "regex": "^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[.:;,\\_/#?!@$£€%^&§%}{*-\\-)([\\]]).{10,}$",
+        "label": "Password",
+        "error": "Wrong password",
+        "value": "",
+        "isValid": null
+    }
+]
