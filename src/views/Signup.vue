@@ -1,6 +1,6 @@
 <script>
 import vueBaseInput from 'vue-base-input';
-import 'vue-base-input/src/assets/vue-base-input-tailwind-css.css';
+import 'vue-base-input/@/assets/vue-base-input-tailwind-css.css';
 import signupJson from '../static/signup.json';
 import check from '@/assets/images/icon-check.svg';
 import openedEye from '@/assets/images/icon-opened-eye.svg';
@@ -45,10 +45,14 @@ export default {
     checkForm() {
       const dataForm = this.modelValue;
       const checkLoop = [];
+      const checkIdentical = [];
 
       for (const key in dataForm) {
         const item = dataForm[key];
         const refItem = this.$refs[item.name];
+        if (item.identicalVal !== '') {
+          checkIdentical.push({ name: item.name, value: item.value });
+        }
         if (item.isRequired) {
           item.isValid = refItem.isValid;
           if (item.isValid && item.value !== '') {
@@ -63,6 +67,8 @@ export default {
         }
       }
 
+      console.log(checkIdentical);
+
       if (clearCheckLoop(checkLoop)) {
         this.resetForm(this.modelValue);
         this.$router({ path: 'success' });
@@ -75,7 +81,7 @@ export default {
 <template>
   <div class="radialGardient h-full items-center flex py-10">
     <img
-      src="src/assets/images/lines.png"
+      src="@/assets/images/lines.png"
       alt=""
       class="absolute bottom-0 left-0"
     />

@@ -1,6 +1,6 @@
 <script>
 import vueBaseInput from 'vue-base-input';
-import 'vue-base-input/src/assets/vue-base-input-tailwind-css.css';
+import 'vue-base-input/@/assets/vue-base-input-tailwind-css.css';
 import signinJson from '../static/signin.json';
 import check from '@/assets/images/icon-check.svg';
 import openedEye from '@/assets/images/icon-opened-eye.svg';
@@ -64,7 +64,7 @@ export default {
 <template>
   <div class="radialGardient h-full items-center flex py-10">
     <img
-      src="src/assets/images/lines.png"
+      src="@/assets/images/lines.png"
       alt=""
       class="absolute bottom-0 left-0"
     />

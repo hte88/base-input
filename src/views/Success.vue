@@ -1,7 +1,7 @@
 <template>
   <div class="radialGardient h-full items-center justify-center flex py-10">
     <img
-      src="src/assets/images/lines.png"
+      src="@/assets/images/lines.png"
       alt=""
       class="absolute bottom-0 left-0"
     />

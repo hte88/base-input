@@ -1,7 +1,7 @@
 <template>
   <div class="radialGardient h-full items-center justify-center flex py-10">
     <img
-      src="src/assets/images/lines.png"
+      src="@/assets/images/lines.png"
       alt=""
       class="absolute bottom-0 left-0"
     />
@@ -12,14 +12,14 @@
       <div class="flex items-center justify-center my-10">
         <a>
           <img
-            src="src/assets/images/github-brands.svg"
+            src="@/assets/images/github-brands.svg"
             alt=""
             class="w-7 h-7 mx-2"
           />
         </a>
         <a>
           <img
-            src="src/assets/images/npm-brands.svg"
+            src="@/assets/images/npm-brands.svg"
             alt=""
             class="w-7 h-7 mx-2"
           />
