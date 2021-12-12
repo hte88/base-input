@@ -6,6 +6,11 @@ import check from '@/assets/images/icon-check.svg';
 import openedEye from '@/assets/images/icon-opened-eye.svg';
 import closedEye from '@/assets/images/icon-closed-eye.svg';
 import warning from '@/assets/images/icon-warning.svg';
+import {
+  shakeMyForm,
+  arrayToObject,
+  clearCheckLoop,
+} from '../static/functions.js';
 
 export default {
   components: {
@@ -14,6 +19,9 @@ export default {
   data() {
     return {
       signinJson,
+      shakeMyForm,
+      arrayToObject,
+      clearCheckLoop,
       modelValue: {},
       check: { src: check, alt: 'good' },
       openedEye,
@@ -22,14 +30,17 @@ export default {
     };
   },
   created() {
-    const arrayToObject = (array, keyField) =>
-      array.reduce((obj, item) => {
-        obj[item[keyField]] = item;
-        return obj;
-      }, {});
-    this.modelValue = arrayToObject(this.signinJson, 'name');
+    this.init();
   },
   methods: {
+    init() {
+      this.modelValue = this.arrayToObject(this.signinJson, 'name');
+    },
+    resetForm(model) {
+      for (const key in model) {
+        this.$refs[model[key].name].callResetValue();
+      }
+    },
     checkForm() {
       const dataForm = this.modelValue;
       const checkLoop = [];
@@ -37,6 +48,14 @@ export default {
       for (const key in dataForm) {
         const item = dataForm[key];
         const refItem = this.$refs[item.name];
+
+        if (item.identicalVal !== '' && item.identicalVal !== undefined) {
+          if (item.value === dataForm[item.identicalVal].value) {
+            refItem.callUpdateIsValid(true);
+          } else {
+            refItem.callUpdateIsValid(false);
+          }
+        }
         if (item.isRequired) {
           item.isValid = refItem.isValid;
           if (item.isValid && item.value !== '') {
@@ -44,30 +63,24 @@ export default {
           } else {
             checkLoop.push(false);
             refItem.callUpdateIsValid(false);
-            document.getElementById('form-login').classList.add('shake');
-            setTimeout(() => {
-              document.getElementById('form-login').classList.remove('shake');
-            }, 500);
+            this.shakeMyForm();
           }
         } else {
           checkLoop.push(true);
         }
       }
 
-      const clearCheckLoop = [...new Set(checkLoop)];
-      return clearCheckLoop.length === 1 && [clearCheckLoop] ? true : false;
+      if (clearCheckLoop(checkLoop)) {
+        this.resetForm(this.modelValue);
+        this.$router.push({ path: 'success' });
+      }
     },
   },
 };
 </script>
 
 <template>
-  <div class="radialGardient h-full items-center flex py-10">
-    <img
-      src="@/assets/images/lines.png"
-      alt=""
-      class="absolute bottom-0 left-0"
-    />
+  <main class="h-full items-center flex py-10">
     <div
       class="
         relative
@@ -86,10 +99,7 @@ export default {
       "
     >
       <div class="perspective w-full md:w-3/4 lg:w-1/2">
-        <div
-          id="form-login"
-          class="mx-auto bg-white rounded px-2 md:px-5 py-10"
-        >
+        <div id="form" class="mx-auto bg-white rounded px-2 md:px-5 py-10">
           <div class="mb-10 text-center w-full">
             <h1 class="mb-2 text-xl uppercase font-bold">Sign In</h1>
             <router-link
@@ -139,43 +149,5 @@ export default {
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
-<style>
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  12.5% {
-    transform: translateX(-6px) rotateY(-5deg);
-  }
-  37.5% {
-    transform: translateX(5px) rotateY(4deg);
-  }
-  62.5% {
-    transform: translateX(-3px) rotateY(-2deg);
-  }
-  87.5% {
-    transform: translateX(2px) rotateY(1deg);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.shake {
-  animation: shake 400ms ease-in-out;
-}
-.perspective {
-  -webkit-perspective: 600px;
-  -ms-perspective: 600px;
-  perspective: 600px;
-}
-.radialGardient {
-  background: radial-gradient(
-    98.84% 45.07% at 28.29% 31.61%,
-    #2f8f83 14.17%,
-    #00525f 100%
-  );
-}
-</style>

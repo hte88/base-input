@@ -45,13 +45,17 @@ export default {
     checkForm() {
       const dataForm = this.modelValue;
       const checkLoop = [];
-      const checkIdentical = [];
 
       for (const key in dataForm) {
         const item = dataForm[key];
         const refItem = this.$refs[item.name];
-        if (item.identicalVal !== '') {
-          checkIdentical.push({ name: item.name, value: item.value });
+
+        if (item.identicalVal !== '' && item.identicalVal !== undefined) {
+          if (item.value === dataForm[item.identicalVal].value) {
+            refItem.callUpdateIsValid(true);
+          } else {
+            refItem.callUpdateIsValid(false);
+          }
         }
         if (item.isRequired) {
           item.isValid = refItem.isValid;
@@ -67,11 +71,9 @@ export default {
         }
       }
 
-      console.log(checkIdentical);
-
       if (clearCheckLoop(checkLoop)) {
         this.resetForm(this.modelValue);
-        this.$router({ path: 'success' });
+        this.$router.push({ path: 'success' });
       }
     },
   },
@@ -79,12 +81,7 @@ export default {
 </script>
 
 <template>
-  <div class="radialGardient h-full items-center flex py-10">
-    <img
-      src="@/assets/images/lines.png"
-      alt=""
-      class="absolute bottom-0 left-0"
-    />
+  <main class="h-full items-center flex">
     <div
       class="
         relative
@@ -104,7 +101,7 @@ export default {
     >
       <div class="perspective w-full md:w-5/6">
         <div
-          id="form-login"
+          id="form"
           class="mx-auto bg-white rounded px-2 md:px-5 py-10"
         >
           <div class="mb-10 text-center w-full">
@@ -159,71 +156,6 @@ export default {
           </div>
         </div>
       </div>
-      <div
-        v-if="false"
-        class="
-          bg-white
-          rounded
-          px-2
-          md:px-5
-          py-10
-          mt-10
-          w-full
-          md:w-3/4
-          lg:w-1/2
-        "
-      >
-        <h1 class="mb-2 text-xl uppercase font-bold">Console</h1>
-        <ul
-          v-for="(item, index) in modelValue"
-          :key="index"
-          class="mt-5 text-xs md:text-sm"
-        >
-          <li class="capitalize font-semibold underline">{{ item.name }}</li>
-          <li><span class="font-semibold">Value:</span> {{ item.value }}</li>
-          <li>
-            <span class="font-semibold">Is Valid:</span> {{ item.isValid }}
-          </li>
-        </ul>
-      </div>
     </div>
-  </div>
+  </main>
 </template>
-<style>
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  12.5% {
-    transform: translateX(-6px) rotateY(-5deg);
-  }
-  37.5% {
-    transform: translateX(5px) rotateY(4deg);
-  }
-  62.5% {
-    transform: translateX(-3px) rotateY(-2deg);
-  }
-  87.5% {
-    transform: translateX(2px) rotateY(1deg);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.shake {
-  animation: shake 400ms ease-in-out;
-}
-.perspective {
-  -webkit-perspective: 600px;
-  -ms-perspective: 600px;
-  perspective: 600px;
-}
-.radialGardient {
-  background: radial-gradient(
-    98.84% 45.07% at 28.29% 31.61%,
-    #2f8f83 14.17%,
-    #00525f 100%
-  );
-}
-</style>

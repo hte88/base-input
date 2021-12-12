@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white shadow absolute w-full">
+  <header class="bg-white shadow w-full">
     <div
       class="
         px-4
@@ -14,7 +14,7 @@
       "
     >
       <router-link to="/">
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">
+        <h1 class="text-xl md:text-3xl font-bold leading-tight text-gray-900">
           Vue-base-input
         </h1>
       </router-link>
@@ -36,16 +36,14 @@
       </div>
     </div>
   </header>
-  <main class="h-full flex">
-    <div class="w-full">
-      <router-view />
-    </div>
-  </main>
+  <router-view />
+  <img
+    src="@/assets/images/lines.png"
+    alt=""
+    class="absolute bottom-0 left-0"
+  />
+  <div class="fixed bottom-0 w-full text-xs text-white flex justify-evenly">
+    <a href="https://portfolio-olivier.netlify.app/">© 2022 Olivier MARION</a>
+    <a href="https://fontawesome.com/">Icons are from Font Awesome</a>
+  </div>
 </template>
-<style>
-html,
-body,
-#app {
-  height: 100%;
-}
-</style>

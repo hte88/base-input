@@ -1,7 +1,7 @@
 export const shakeMyForm = () => {
-  document.getElementById('form-login').classList.add('shake');
+  document.getElementById('form').classList.add('shake');
   setTimeout(() => {
-    document.getElementById('form-login').classList.remove('shake');
+    document.getElementById('form').classList.remove('shake');
   }, 500);
 };
 
@@ -14,5 +14,5 @@ export const arrayToObject = (array, keyField) => {
 
 export const clearCheckLoop = (array) => {
   const clearCheckLoop = [...new Set(array)];
-  return clearCheckLoop.length === 1 && [clearCheckLoop] ? true : false;
+  return clearCheckLoop.length === 1 && clearCheckLoop[0] ? true : false;
 };

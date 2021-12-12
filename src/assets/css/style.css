@@ -1,0 +1,57 @@
+*, :after, :before {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  display: block;
+}
+body {
+  background: radial-gradient(
+    98.84% 45.07% at 28.29% 31.61%,
+    #2f8f83 14.17%,
+    #00525f 100%
+  );
+}
+html,
+body,
+#app,
+main {
+  min-height: 100%;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  12.5% {
+    transform: translateX(-6px) rotateY(-5deg);
+  }
+  37.5% {
+    transform: translateX(5px) rotateY(4deg);
+  }
+  62.5% {
+    transform: translateX(-3px) rotateY(-2deg);
+  }
+  87.5% {
+    transform: translateX(2px) rotateY(1deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shake {
+  animation: shake 400ms ease-in-out;
+}
+.perspective {
+  -webkit-perspective: 600px;
+  -ms-perspective: 600px;
+  perspective: 600px;
+}
+.radialGardient {
+  background: radial-gradient(
+    98.84% 45.07% at 28.29% 31.61%,
+    #2f8f83 14.17%,
+    #00525f 100%
+  );
+}
