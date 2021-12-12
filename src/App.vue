@@ -21,14 +21,14 @@
       <div class="flex items-center justify-center">
         <a href="https://github.com/hte88/vue-base-input">
           <img
-            src="src/assets/images/github-brands.svg"
+            src="@/assets/images/github-brands.svg"
             alt=""
             class="w-7 h-7 mx-2"
           />
         </a>
         <a href="https://www.npmjs.com/package/vue-base-input">
           <img
-            src="src/assets/images/npm-brands.svg"
+            src="@/assets/images/npm-brands.svg"
             alt=""
             class="w-7 h-7 mx-2"
           />
