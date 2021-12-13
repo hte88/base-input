@@ -22,7 +22,7 @@
         "isRequired": true,
         "regex": "^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[.:;,\\_/#?!@$£€%^&§%}{*-\\-)([\\]]).{10,}$",
         "label": "Password",
-        "error": "Wrong password",
+        "error": "Wrong password 'Azerty*1234'",
         "value": "",
         "isValid": null
     }
