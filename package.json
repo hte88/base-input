@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "vue": "^3.2.20",
-    "vue-base-input": "^1.0.8",
+    "vue-base-input": "^1.0.9",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {

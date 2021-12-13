@@ -1050,10 +1050,10 @@ vite@^2.7.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vue-base-input@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/vue-base-input/-/vue-base-input-1.0.8.tgz#821294a06e1be683048828b710bfac6085181df5"
-  integrity sha512-UPL/gEFQd+dLoQpD5uU9ZhH67wkyBLHqvLnEeVZggNPG5kMx7j2NnUtcU4nXuTV7T7qUSlUno+KWbdAmcSyVpg==
+vue-base-input@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/vue-base-input/-/vue-base-input-1.0.9.tgz#40cd693c7b6be5b7a76a78d5035492b23953a846"
+  integrity sha512-4ZQFKe8wPLZ03oQ8KkqwOts/TuPCJFkOn4M1HRJmoRWj2BTm4fZf1juDK0s+6WZ0fRccVOcfZSWEbLWfHzcZ1w==
 
 vue-router@^4.0.12:
   version "4.0.12"
