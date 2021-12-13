@@ -1038,10 +1038,10 @@ util-deprecate@^1.0.2:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
-vite@^2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.1.tgz#be50ad13214290ecbebbe5ad389ed423cb5f137e"
-  integrity sha512-TDXXhcu5lyQ6uosK4ZWaOyB4VzOiizk0biitRzDzaEtgSUi8rVYPc4k1xgOjLSf0OuceDJmojFKXHOX9DB1WuQ==
+vite@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.2.tgz#f9937114cf2e730a7e2e4c4f8c26ed0ed1c3bb6b"
+  integrity sha512-wMffVVdKZRZP/HwW3yttKL8X+IJePz7bUcnGm0vqljffpVwHpjWC3duZtJQHAGvy+wrTjmwU7vkULpZ1dVXY6w==
   dependencies:
     esbuild "^0.13.12"
     postcss "^8.3.11"
@@ -1050,10 +1050,10 @@ vite@^2.7.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vue-base-input@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/vue-base-input/-/vue-base-input-1.0.8.tgz#821294a06e1be683048828b710bfac6085181df5"
-  integrity sha512-UPL/gEFQd+dLoQpD5uU9ZhH67wkyBLHqvLnEeVZggNPG5kMx7j2NnUtcU4nXuTV7T7qUSlUno+KWbdAmcSyVpg==
+vue-base-input@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/vue-base-input/-/vue-base-input-1.0.9.tgz#40cd693c7b6be5b7a76a78d5035492b23953a846"
+  integrity sha512-4ZQFKe8wPLZ03oQ8KkqwOts/TuPCJFkOn4M1HRJmoRWj2BTm4fZf1juDK0s+6WZ0fRccVOcfZSWEbLWfHzcZ1w==
 
 vue-router@^4.0.12:
   version "4.0.12"
